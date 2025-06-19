@@ -28,3 +28,4 @@ return new class extends Migration
         });
     }
 };
+// This migration creates a foreign key relationship between the 'schedules' table and the 'courses' table.

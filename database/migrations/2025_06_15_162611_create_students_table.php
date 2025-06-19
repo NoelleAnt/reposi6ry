@@ -19,7 +19,8 @@ class CreateStudentsTable extends Migration
             $table->string('last_name');
             $table->string('program');
             $table->year('enrollment_year');
-            
+            $table->date('birthday')->nullable(); // Make birthday nullable if it's not always provided
+            $table->timestamps(); // Add created_at and updated_at columns
         });
     }
 
@@ -33,3 +34,4 @@ class CreateStudentsTable extends Migration
         Schema::dropIfExists('students');
     }
 }
+// This migration creates the students table with the specified columns and their data types.

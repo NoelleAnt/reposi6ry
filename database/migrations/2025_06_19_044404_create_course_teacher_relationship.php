@@ -29,3 +29,4 @@ return new class extends Migration
         });
     }
 };
+// This migration creates a foreign key relationship between the 'courses' table and the 'teachers' table.

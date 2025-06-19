@@ -14,5 +14,6 @@ class Schedule extends Model
         'time_slot',
         'room',
         'term',
+        'course_id', // Added course_id here
     ];
 }

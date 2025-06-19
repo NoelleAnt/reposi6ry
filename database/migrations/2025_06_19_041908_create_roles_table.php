@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles_table', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('role_name'); // Adding role_name column
+            $table->text('description'); // Adding description column
+            $table->timestamps(); // This will create both created_at and updated_at columns
         });
     }
 
@@ -22,6 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles_table');
+        Schema::dropIfExists('roles');
     }
 };
+// This migration creates a 'roles' table with columns for role_name, description, and timestamps.

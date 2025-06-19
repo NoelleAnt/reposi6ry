@@ -20,6 +20,7 @@ class CreateTeachersTable extends Migration
             $table->string('email')->unique();
             $table->string('department');
             $table->date('birthday')->nullable();
+            $table->timestamps(); // Adds created_at and updated_at columns
         });
     }
 
@@ -33,3 +34,4 @@ class CreateTeachersTable extends Migration
         Schema::dropIfExists('teachers'); // Drops the teachers table if it exists
     }
 }
+// This migration creates the teachers table with columns for first_name, last_name, email, department, birthday, and timestamps.

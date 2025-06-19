@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('day_of_week');
+            $table->string('time_slot');
+            $table->string('room');
+            $table->string('term');
             $table->timestamps();
+            
+
         });
     }
 
@@ -25,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('schedules');
     }
 };
+// This migration creates a 'schedules' table with columns for day_of_week, time_slot, room, and term.

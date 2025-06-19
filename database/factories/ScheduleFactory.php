@@ -16,6 +16,7 @@ class ScheduleFactory extends Factory
             'time_slot' => $this->faker->time,
             'room' => $this->faker->word,
             'term' => $this->faker->word,
+            'course_id' => $this->faker->numberBetween(1, 10), // Assuming course IDs are between 1 and 10
         ];
     }
 }

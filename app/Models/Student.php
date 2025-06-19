@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Student extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -25,7 +25,7 @@ class Student extends Model
     }
 
     public function courses()
-    {
-        return $this->belongsToMany(Course::class, 'course_student'); // Assuming a pivot table
-    }
+{
+    return $this->belongsToMany(Course::class);
+}
 }
