@@ -18,10 +18,10 @@ class Course extends Model
         'description',
     ];
 
-    public function students()
-    {
-        return $this->belongsToMany(Student::class, 'course_student'); // Assuming a pivot table
-    }
+public function students()
+{
+    return $this->belongsToMany(Student::class);
+}
 
     public function teacher()
     {
