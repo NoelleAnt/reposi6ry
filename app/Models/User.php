@@ -3,16 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Model
 {
-    public function student(): HasOne
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'user_name',
+        'password',
+        'registration_date',
+        'role_id',  // Foreign key to the Role model
+    ];
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function student()
     {
         return $this->hasOne(Student::class);
     }
 
-    public function teacher(): HasOne
+    public function teacher()
     {
         return $this->hasOne(Teacher::class);
     }
