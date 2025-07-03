@@ -3,83 +3,90 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    // Display a listing of the roles.
-    public function index()
+    private function Process1() {}
+    /**
+     * Display a listing of the resource.
+     */
+    public function index() //GET
     {
+        $this->Process1();
         $roles = Role::all();
-        return response()->json($roles);
+        return view('roles.index', ['roles' => $roles]);
     }
 
-    // Show the form for creating a new role.
-    public function create()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()    //GET
     {
         return view('roles.create');
-
     }
 
-    // Store a newly created role in storage.
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request) //POST
     {
-        $request->validate([
-            'role_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+        $validateData = $request->validate([
+            'role_name' => 'required|max:255',
+            'description' => 'max:255'
         ]);
+        $role = Role::create($validateData);
+        return redirect()
+            ->route('roles.index')
+            ->with('success', 'Category created successfully.');
+    }
 
-        $role = Role::create($request->all());
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)    //GET
+    {
+        $role = Role::find($id);
+        return view('roles.show', ['role' => $role]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)    //GET
+    {
+        $role = Role::find($id);
+        return view('roles.edit', ['role' => $role]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)    //PUT-PATCH
+    {
+        $role = Role::find($id);
+        $validateData = $request->validate([
+            'role_name' => 'required|max:255',
+            'description' => 'max:255'
+        ]);
+        $role->update($validateData);
         return redirect()
             ->route('roles.index')
             ->with('success', 'Role created successfully.');
     }
 
-    // Display the specified role.
-    public function show($id)
-    {
-        $role = Role::find($id);
-        
-        // Check if the role exists
-        if (!$role) {
-            return response()->json(['message' => 'Role not found'], 404);
-        }
-
-        return view('roles.show', ['role' => $role]);
-    }
-
-    // Show the form for editing the specified role.
-    public function edit(string $id)
-    {
-        $role = Role::find($id);
-        // Check if the role exists
-        return view('roles.edit', ['role' => $role]);
-    }
-
-    // Update the specified role in storage.
-    public function update(Request $request, string $id)
-    {
-        $role = Role::find($id);
-        $validatedData = $request->validate([
-            'role_name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-        ]);
-        $role->update($validatedData);
-        return redirect()
-            ->route('roles.index')
-            ->with('success', 'Role updated successfully.');
-    }
-
-    // Remove the specified role from storage.
-    public function destroy(string $id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id) //DELETE
     {
         try {
             $role = Role::find($id);
             $role->delete();
             return redirect()
                 ->route('roles.index')
-                ->with('success', 'Role deleted successfully.');
+                ->with('success', 'Role was deleted.');
         } catch (Exception $ex) {
             throw $ex;
         }
